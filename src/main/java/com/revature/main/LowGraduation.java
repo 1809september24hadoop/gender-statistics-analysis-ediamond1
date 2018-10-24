@@ -28,14 +28,16 @@ public class LowGraduation {
 		
 		job.setMapperClass(GraduationMapper.class);		//these validate the mapper and reducer extend Mapper and Reducer
 		
-		//Intermediate Reducer (combiner)
-		//job.setCombinerClass(SumReducer.class);
+		//job.setNumReduceTasks(0);
 		
 		//Output of combiner will be input of actual reducer
 		job.setReducerClass(LowGraduationReducer.class);
 		
 		job.setOutputKeyClass(Text.class);			//These don't have validation
 		job.setOutputValueClass(DoubleWritable.class);
+		
+//		job.setMapOutputKeyClass(Text.class);			//These don't have validation
+//		job.setMapOutputValueClass(DoubleWritable.class);
 		
 		boolean success = job.waitForCompletion(true);
 		System.exit(success ? 0 : 1);

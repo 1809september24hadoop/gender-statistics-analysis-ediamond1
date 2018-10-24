@@ -11,7 +11,7 @@ import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.revature.map.USEmploymentMapperM;
+import com.revature.map.EmploymentMapperM;
 import com.revature.reduce.EmploymentChangeReducerM;
 
 public class MaleEmploymentIncreaseTest {
@@ -24,7 +24,7 @@ public class MaleEmploymentIncreaseTest {
 
 	@Before
 	public void setup(){
-		USEmploymentMapperM mapper = new USEmploymentMapperM();
+		EmploymentMapperM mapper = new EmploymentMapperM();
 		mapDriver = new MapDriver<>();
 		mapDriver.setMapper(mapper);
 
@@ -39,7 +39,7 @@ public class MaleEmploymentIncreaseTest {
 
 	@Test
 	public void testMapper(){
-		Text test = new Text("\"United States\",\"USA\",\"Gross graduation ratio, tertiary, male (%)\",\"SL.EMP.TOTL.SP.MA.NE.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+		Text test = new Text("\"United States\",\"WLD\",\"Gross graduation ratio, tertiary, male (%)\",\"SL.EMP.TOTL.SP.MA.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"20.6\",\"25.8\",\"28.6\",\"\",\"30.1\",\"35.9\",\"41.2\"");
@@ -70,22 +70,22 @@ public class MaleEmploymentIncreaseTest {
 
 		reduceDriver.withInput(new Text("United States"), values);
 
-		reduceDriver.withOutput(new Text("Increase in employed percentage of US male poputaion since 2000:"), new DoubleWritable(-20.6));
-		reduceDriver.withOutput(new Text("Increase in US male employment since 2000 as a ratio:"), new DoubleWritable(-1.0));
+		reduceDriver.withOutput(new Text("Increase in employed percentage of male poputaion since 2000:"), new DoubleWritable(-20.6));
+		reduceDriver.withOutput(new Text("Increase in male employment since 2000 as a ratio:"), new DoubleWritable(-1.0));
 		
 		reduceDriver.runTest();
 	}
 
 	@Test
 	public void testMapReducer(){
-		Text test = new Text("\"United States\",\"USA\",\"Gross graduation ratio, tertiary, male (%)\",\"SL.EMP.TOTL.SP.MA.NE.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
+		Text test = new Text("\"United States\",\"WLD\",\"Gross graduation ratio, tertiary, male (%)\",\"SL.EMP.TOTL.SP.MA.ZS\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\","
 				+ "\"20.6\",\"25.8\",\"28.6\",\"30.1\",\"35.9\",\"41.2\"");
 		mapReduceDriver.withInput(new LongWritable(1), test);
 		
-		mapReduceDriver.withOutput(new Text("Increase in employed percentage of US male poputaion since 2000:"), new DoubleWritable(-20.6));
-		mapReduceDriver.withOutput(new Text("Increase in US male employment since 2000 as a ratio:"), new DoubleWritable(-1.0));
+		mapReduceDriver.withOutput(new Text("Increase in employed percentage of male poputaion since 2000:"), new DoubleWritable(-20.6));
+		mapReduceDriver.withOutput(new Text("Increase in male employment since 2000 as a ratio:"), new DoubleWritable(-1.0));
 
 		mapReduceDriver.runTest();
 	}

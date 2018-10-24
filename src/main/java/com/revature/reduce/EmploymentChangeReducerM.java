@@ -28,8 +28,8 @@ public class EmploymentChangeReducerM extends Reducer<Text, DoubleWritable, Text
 		}
 		ratio = new AtomicDouble(-1*increase.get()/first.get());
 		
-		context.write(new Text("Increase in employed percentage of US male poputaion since 2000:"), new DoubleWritable(-1*increase.get()));
-		context.write(new Text("Increase in US male employment since 2000 as a ratio:"), new DoubleWritable(ratio.get()));
+		context.write(new Text("Increase in employed percentage of male poputaion since 2000:"), new DoubleWritable(-1*increase.get()));
+		context.write(new Text("Increase in male employment since 2000 as a ratio:"), new DoubleWritable(ratio.get()));
 		
 	}
 
