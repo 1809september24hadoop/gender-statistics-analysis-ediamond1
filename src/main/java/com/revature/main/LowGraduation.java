@@ -10,6 +10,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import com.revature.map.GraduationMapper;
 import com.revature.reduce.LowGraduationReducer;
 
+/**
+ * Finds countries where female graduation rate is less that 30%
+ * @author cloudera
+ *
+ */
 public class LowGraduation {
 	public static void main(String[] args) throws Exception {
 		if (args.length != 2) {
@@ -26,18 +31,11 @@ public class LowGraduation {
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		
-		job.setMapperClass(GraduationMapper.class);		//these validate the mapper and reducer extend Mapper and Reducer
-		
-		//job.setNumReduceTasks(0);
-		
-		//Output of combiner will be input of actual reducer
+		job.setMapperClass(GraduationMapper.class);		
 		job.setReducerClass(LowGraduationReducer.class);
 		
-		job.setOutputKeyClass(Text.class);			//These don't have validation
+		job.setOutputKeyClass(Text.class);			
 		job.setOutputValueClass(DoubleWritable.class);
-		
-//		job.setMapOutputKeyClass(Text.class);			//These don't have validation
-//		job.setMapOutputValueClass(DoubleWritable.class);
 		
 		boolean success = job.waitForCompletion(true);
 		System.exit(success ? 0 : 1);

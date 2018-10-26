@@ -7,11 +7,13 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-
-public class USGraduationMapperF extends Mapper<LongWritable, Text, Text, DoubleWritable>{		//generics are input K/V, output K/V, will depend on the actual task
+/**
+ * Used to write US data for Gross graduation ratio, tertiary, female (%), since the year 2000
+ */
+public class USGraduationMapperF extends Mapper<LongWritable, Text, Text, DoubleWritable>{	
 
 	@Override
-	public void map(LongWritable key, Text value, Context context)  				//context abstracts where we're writing
+	public void map(LongWritable key, Text value, Context context)  				
 			throws IOException, InterruptedException{
 
 		String line = value.toString();
@@ -19,14 +21,11 @@ public class USGraduationMapperF extends Mapper<LongWritable, Text, Text, Double
 
 		if (parsedLines[1].equals("USA") && parsedLines[3].equals("SE.TER.CMPL.FE.ZS")){		
 			String country = parsedLines[0];
-//			for(int i = 0 ; i < parsedLines.length; i++){
-//				System.out.println("string is [" + parsedLines[i] + "]");
-//			}
 
-			for(int i = 44; i < parsedLines.length; i++){							//this is the range of columns where actual numeric data is found (starting at the year 2000
+			for(int i = 44; i < parsedLines.length; i++){							
 				String cellData = parsedLines[i];
 				try{
-					if (cellData.length() > 0){						//write to map output for every non-empty cell, to get every datapoint.
+					if (cellData.length() > 0){					
 						context.write(new Text(country), new DoubleWritable(Double.valueOf(cellData)));
 					}
 				}catch(NumberFormatException e){

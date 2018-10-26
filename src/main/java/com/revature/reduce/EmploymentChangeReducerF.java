@@ -8,6 +8,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import com.google.common.util.concurrent.AtomicDouble;
 
+/**
+ * Calculates the change in Employment rates over the period of data recieved
+ * @author cloudera
+ *
+ */
 public class EmploymentChangeReducerF extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {  	//our input is the output of the Mapper
 	
 	static AtomicDouble first = new AtomicDouble(0.0);

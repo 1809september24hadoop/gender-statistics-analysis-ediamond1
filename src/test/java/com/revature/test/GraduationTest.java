@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.revature.main.RegionalFPopPrct;
+import com.revature.archive.RegionalFPopPrct;
 import com.revature.map.GraduationMapper;
 import com.revature.reduce.LowGraduationReducer;
 
@@ -80,8 +80,7 @@ public class GraduationTest {
 		mapReduceDriver.addOutput(new Text("TestCountry"), new DoubleWritable(29.9));
 		
 		mapReduceDriver.runTest();
-		
-		LOGGER.info("Logged");
+	
 	}
 
 }

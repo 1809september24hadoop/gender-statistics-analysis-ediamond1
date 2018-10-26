@@ -7,12 +7,14 @@
 
 	<!-- Change name of jar to keep it simple -->
 	<build>
-        <finalName>GenderStats</finalName>
-    </build>
+		<finalName>GenderStats</finalName>
+	</build>
 	<!-- Make project Java 8 -->
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- Specifies where the properties file is located -->
+		<log4j.configuration>log4j.properties</log4j.configuration>
 	</properties>
 	<dependencies>
 		<!-- JDK Tools -->

@@ -9,6 +9,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 import com.google.common.util.concurrent.AtomicDouble;
 import com.revature.util.Rounder;
 
+/**
+ * Takes in graduation rate data and returns the increase between each successive year
+ * @author cloudera
+ *
+ */
 public class EducationIncreaseFReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {  	//our input is the output of the Mapper
 	
 	static AtomicDouble old = new AtomicDouble(0.0);

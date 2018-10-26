@@ -10,6 +10,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import com.revature.map.EmploymentMapperM;
 import com.revature.reduce.EmploymentChangeReducerM;
 
+/**
+ * Calculates worldwide increase in male employment since 2000
+ * @author cloudera
+ *
+ */
 public class MaleEmploymentIncrease {
 	public static void main(String[] args) throws Exception {
 		if (args.length != 2) {
@@ -26,18 +31,11 @@ public class MaleEmploymentIncrease {
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		
-		job.setMapperClass(EmploymentMapperM.class);		//these validate the mapper and reducer extend Mapper and Reducer
-		
-		//Output of combiner will be input of actual reducer
+		job.setMapperClass(EmploymentMapperM.class);		
 		job.setReducerClass(EmploymentChangeReducerM.class);
 		
-//		job.setNumReduceTasks(0);
-		
-		job.setOutputKeyClass(Text.class);			//These don't have validation
+		job.setOutputKeyClass(Text.class);			
 		job.setOutputValueClass(DoubleWritable.class);
-		
-//		job.setMapOutputKeyClass(Text.class);
-//		job.setMapOutputValueClass(DoubleWritable.class);
 		
 		boolean success = job.waitForCompletion(true);
 		System.exit(success ? 0 : 1);

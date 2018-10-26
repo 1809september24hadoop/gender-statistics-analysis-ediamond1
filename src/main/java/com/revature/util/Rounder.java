@@ -1,5 +1,10 @@
 package com.revature.util;
 
+/**
+ * used to round a double to a given number of decimal places
+ * @author Jonik
+ *
+ */
 public class Rounder {
 	
 	public static double round(double value, int places) {

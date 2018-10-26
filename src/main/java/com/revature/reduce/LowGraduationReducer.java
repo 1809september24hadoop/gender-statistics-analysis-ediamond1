@@ -1,8 +1,6 @@
 package com.revature.reduce;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
@@ -10,15 +8,18 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import com.google.common.util.concurrent.AtomicDouble;
 
-public class LowGraduationReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {  	//our input is the output of the Mapper
+/**
+ * Filters input and writes countries where Female graduation rate is less than 30.0%
+ * @author cloudera
+ *
+ */
+public class LowGraduationReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {  	
 	
 	public void reduce(Text key, Iterable<DoubleWritable> values, Context context) 
 			throws IOException, InterruptedException{
 		AtomicDouble femaleGraduationRate = new AtomicDouble(0.0);
 		
-		List<DoubleWritable> vals = new ArrayList<DoubleWritable>();
-		
-		for(DoubleWritable value: values){
+		for(DoubleWritable value : values){
 			femaleGraduationRate.set(value.get());
 		}
 		

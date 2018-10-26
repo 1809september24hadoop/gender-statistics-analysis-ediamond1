@@ -9,6 +9,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import com.google.common.util.concurrent.AtomicDouble;
 
+/**
+ * Averages the annual change in graduation rate, give an input of those changes
+ * @author cloudera
+ *
+ */
 public class IncreaseAvgReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {  	//our input is the output of the Mapper
 	
 	
